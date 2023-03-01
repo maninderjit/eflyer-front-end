@@ -17,7 +17,13 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.previousUrl = params['url'];
+      let action = params['logout'];
+      if(action == 'true'){
+        UserService.logout();
+        this.router.navigateByUrl('/home');
+        return;
+      }
+      this.previousUrl = params['url'];      
       console.log('previousUrl', this.previousUrl);
     });
   }

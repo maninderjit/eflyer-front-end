@@ -12,10 +12,18 @@ export class UserService {
 
   }
 
+  saveOrUpdate(user:any):any{
+    return this.http.post(`${userBaseUrl}`,user);
+  }
+  
   login(user:any):any{
     return this.http.post(`${userBaseUrl}/auth`,user);
+  
   }
 
+  static logout():any{
+    localStorage.removeItem('XXXXUSERYYYY');
+  }
   static setUser(user:any):void{
     let iText = JSON.stringify(user);
     localStorage.setItem('XXXXUSERYYYY', iText);

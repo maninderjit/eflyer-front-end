@@ -15,12 +15,21 @@ export class CartService {
   }
 
   getCartByIp(ipAddress:string):any{
-    return this.http.get(`${baseUrl}/get/${ipAddress}`);
+    return this.http.get(`${baseUrl}/get-by-ip/${ipAddress}`);
   }
 
-  addItemIntoCart(ipAddress:string, itemId:number):any{
+  getCartById(userId:number):any{
+    return this.http.get(`${baseUrl}/get-by-id/${userId}`);
+  }
+
+  addItemIntoCartByIp(ipAddress:string, itemId:number):any{
     let data = {"itemId":itemId};    
-    return this.http.post(`${baseUrl}/save/${ipAddress}`, data);
+    return this.http.post(`${baseUrl}/save-by-ip/${ipAddress}`, data);
+  }
+
+  addItemIntoCartById(userId:number, itemId:number):any{
+    let data = {"itemId":itemId};    
+    return this.http.post(`${baseUrl}/save-by-id/${userId}`, data);
   }
 
   orderNow(cart:any):any{

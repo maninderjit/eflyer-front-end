@@ -18,27 +18,40 @@ export class CartComponent implements OnInit {
   ngOnInit() :void {
     let itemId:number = this.route.snapshot.params["itemId"];
     console.log('itemId',itemId);
-    //this.cartService.getIPAddress().subscribe((object:any)=>{
-      //console.log('20 line', object.ip, typeof(object.ip));
-      //let ipAddress = object.ip;
-      let ipAddress = '192.168.1.156';
-      if(itemId > 0){
-        this.cartService.addItemIntoCart(ipAddress,itemId).subscribe((cart:any)=>{
-          this.cart = cart;
-          this.router.navigateByUrl("/cart");
-        });
-      }else{
-        this.cartService.getCartByIp(ipAddress).subscribe((cart:any)=>{
-          this.cart = cart;
-        });
-      }
-      let user = UserService.getUser();
-      if(user != null){
-        this.cart.deliveryAddress = user.address != null ? user.address : {};
-      } else {
-        this.cart.deliveryAddress = {};
-      }     
-    //});
+    let user = UserService.getUser();
+    if(user.id > 0){
+       let userId = user.id;
+        if(itemId > 0){
+          this.cartService.addItemIntoCartById(userId,itemId).subscribe((cart:any)=>{
+            this.cart = cart;
+            this.router.navigateByUrl("/cart");
+          });
+        }else{
+          this.cartService.getCartById(userId).subscribe((cart:any)=>{
+            this.cart = cart;
+          });
+        }
+    }else{
+      this.cartService.getIPAddress().subscribe((object:any)=>{
+        console.log('20 line', object.ip, typeof(object.ip));
+        let ipAddress = object.ip;
+        if(itemId > 0){
+          this.cartService.addItemIntoCartByIp(ipAddress,itemId).subscribe((cart:any)=>{
+            this.cart = cart;
+            this.router.navigateByUrl("/cart");
+          });
+        }else{
+          this.cartService.getCartByIp(ipAddress).subscribe((cart:any)=>{
+            this.cart = cart;
+          });
+        }
+      });
+    }
+    if(user != null){
+      this.cart.deliveryAddress = user.address != null ? user.address : {};
+    } else {
+      this.cart.deliveryAddress = {};
+    }
   }
 
   onUnitsChange(event:any, index:number) : void{
@@ -74,8 +87,11 @@ export class CartComponent implements OnInit {
       this.router.navigateByUrl("/login?url="+url);
       return;
     }
+    if(!this.cart.deliveryAddress || !this.cart.deliveryAddress.address1){
+      this.router.navigateByUrl("/user");
+      return;
+    }
     if(this.cart.cartItemList.length > 0){
-      this.cart.deliveryAddress = user.address != null ? user.address : {};
       this.cartService.orderNow(this.cart).subscribe((cart:any)=>{
         if(cart.paid){
           alert("Successfully placed order.");

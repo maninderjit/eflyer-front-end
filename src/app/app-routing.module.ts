@@ -6,6 +6,7 @@ import { DashboardComponent } from './sections/dashboard/dashboard.component';
 import { ItemComponent } from './sections/item/item.component';
 import { CartComponent } from './sections/cart/cart.component';
 import { AddressComponent } from './address/address.component';
+import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
   {path : '', redirectTo:'/home', pathMatch:'full'},
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path : 'cart/:itemId', component: CartComponent},
   {path : 'address', component: AddressComponent},
   {path : 'login', component: LoginComponent},
+  {path : 'user', component:UserComponent}
 
 ];
 
