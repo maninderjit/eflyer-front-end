@@ -1,0 +1,34 @@
+<!-- dashboard section start -->
+<div class="fashion_section" *ngFor="let dashboard of dashboardList; index as dashboardIndex;">
+    <div class="carousel slide main_slider" data-ride="carousel">
+       <div class="carousel-inner">
+          <div class="carousel-item active">
+             <div class="container">
+                <h1 class="fashion_taital">{{dashboard.title}}</h1>
+                <div class="fashion_section_2">
+                   <div class="row">
+                      <div class="col-lg-4 col-md-4 col-sm-4" *ngFor="let item of activatedItemList(dashboardIndex); index as itemIndex;">
+                         <div class="box_main">
+                            <h4 class="shirt_text">{{item.name}}</h4>
+                            <p class="price_text">Start Price  <span style="color: #262626;">$ {{item.price}}</span></p>
+                            <div class="electronic_img"><img src="assets/images/{{item.imagePath}}"></div>
+                            <div class="btn_main">
+                               <div class="buy_bt"><a routerLink="/cart/{{item.id}}">Buy Now</a></div>
+                               <div class="seemore_bt"><a routerLink="/item/{{item.id}}">See More</a></div>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+       <a class="carousel-control-prev" (click)="prev(dashboardIndex)" role="button" data-slide="prev">
+       <i class="fa fa-angle-left"></i>
+       </a>
+       <a class="carousel-control-next" (click)="next(dashboardIndex)" role="button" data-slide="next">
+       <i class="fa fa-angle-right"></i>
+       </a>
+    </div>
+  </div>
+  <!-- dashboard section end -->

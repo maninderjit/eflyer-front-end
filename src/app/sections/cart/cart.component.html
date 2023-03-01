@@ -1,0 +1,52 @@
+<!-- cart section start -->
+<div class="fashion_section">
+    <div class="carousel slide main_slider" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active activated-item">
+                <div class="container">
+                    <h1 class="fashion_taital">Cart</h1>
+                    <div class="fashion_section_2">                        
+                        <div class="row"  *ngFor="let cartItem of cart.cartItemList; index as i; first as isFirst">
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                <div class="electronic_img"><img src="assets/images{{cartItem.item.imagePath}}"></div>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8">
+                                <div class="box_main">
+                                    <h4 class="shirt_text"></h4>
+                                    <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4">
+                                            <span class="price_text">Name:-  <span style="color: #262626;"> {{cartItem.item.name}}</span></span>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-4">
+                                            <span class="price_text">Unit(s):-  <span style="color: #262626;"> <input type="number" id="units{{i}}" placeholder="0" [value]="cartItem.units" (input)="onUnitsChange($event, i)" min="1" max="10000" style="border: 0px solid;"/></span></span>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-4">
+                                            <span class="price_text">Unit Price:-  <span style="color: #262626;">$ {{cartItem.price}}</span></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4">
+                                            <span class="price_text">Total Price:-  <span style="color: #262626;"> {{cartItem.totalPrice}}</span></span>                                        
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-4">
+                                            <span class="price_text">Discount:-  <span style="color: #262626;"> {{cartItem.discount}}</span></span>                                        
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-4">
+                                            <span class="price_text">Payable Price:-  <span style="color: #262626;">$ {{cartItem.payablePrice}}</span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn_main">
+                            <div class="buy_bt"><a href="#">{{getTotalPayablePrice()}}</a></div>
+                            <div class="buynow_bt"><a (click)="orderNow()">Order Now</a></div>
+                         </div>
+                    </div>                     
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- cart section end -->
